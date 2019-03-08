@@ -1,28 +1,28 @@
 package com.yss.codetemplate;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
- * @author hansong.xhs
- * @version $Id: CodeMakerSettings.java, v 0.1 2017-01-28 9:30 hansong.xhs Exp $$
+ * @author lixingjun
+ * @date 2019/3/7
+ * @description: 持久化配置组件
  */
 @State(name = "CodeTemplateSettings", storages = {@Storage(file = "$APP_CONFIG$/CodeTemplate-settings.xml")})
 public class CodeTemplateSettings implements PersistentStateComponent<CodeTemplateSettings> {
 
-    /**
-     * The constant LOGGER.
-     */
+
     private static final Logger LOGGER = Logger.getInstance(CodeTemplateSettings.class);
 
     public CodeTemplateSettings() {
@@ -31,15 +31,15 @@ public class CodeTemplateSettings implements PersistentStateComponent<CodeTempla
 
     private void loadDefaultSettings() {
         try {
-            Map<String, CodeTemplate> codeTemplates = new HashMap<>();
-            codeTemplates.put("Model",
-                    createCodeTemplate("Model.vm"));
-            codeTemplates.put("Converter",
-                    createCodeTemplate("Converter.vm"));
-            codeTemplates.put("Specs2 Matcher",
-                    createCodeTemplate("specs2-matcher.vm"));
-            codeTemplates.put("FieldComment",
-                    createCodeTemplate("FieldComment.vm"));
+            Map<String, CodeTemplate> codeTemplates = new TreeMap<>();
+
+            String velocityTemplate = FileUtil.loadTextAndClose(CodeTemplateSettings.class.getResourceAsStream("/template/default.json"));
+            JSONArray array = JSON.parseArray(velocityTemplate);
+            for (int i = 0; i < array.size(); i++) {
+                JSONObject codeTempJson = array.getJSONObject(i);
+                String name = codeTempJson.getString("name");
+                codeTemplates.put(name, new CodeTemplate(name, codeTempJson.getString("template")));
+            }
 
             this.codeTemplates = codeTemplates;
         } catch (Exception e) {
@@ -47,17 +47,7 @@ public class CodeTemplateSettings implements PersistentStateComponent<CodeTempla
         }
     }
 
-    @NotNull
-    private CodeTemplate createCodeTemplate(String sourceTemplateName) throws IOException {
-        String velocityTemplate = FileUtil.loadTextAndClose(CodeTemplateSettings.class.getResourceAsStream("/template/" + sourceTemplateName));
-        return new CodeTemplate(sourceTemplateName, velocityTemplate);
-    }
 
-    /**
-     * Getter method for property <tt>codeTemplates</tt>.
-     *
-     * @return property value of codeTemplates
-     */
     public Map<String, CodeTemplate> getCodeTemplates() {
         if (codeTemplates == null) {
             loadDefaultSettings();

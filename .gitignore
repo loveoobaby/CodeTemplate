@@ -10,6 +10,8 @@ _roadhog-api-doc
 # production
 /dist
 /vscode
+/out
+.gradle
 
 # misc
 .DS_Store

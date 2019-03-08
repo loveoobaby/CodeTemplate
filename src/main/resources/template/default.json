@@ -1,0 +1,13 @@
+[
+  {
+    "name": "netty",
+    "template": "netty-tcp"
+  },
+  {
+    "name": "netty-2",
+    "template": "netty-udp"
+  }, {
+    "name":"rabbit",
+    "template":
+}
+]

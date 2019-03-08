@@ -13,18 +13,16 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * @author hansong.xhs
- * @version $Id: TemplateEditPane.java, v 0.1 2017-01-31 9:06 hansong.xhs Exp $$
+ * @author lixingjun
+ * @date 2019/3/7
+ * @description: TODO
  */
 public class TemplateEditPane {
 
-    private JPanel     templateEdit;
+    private JPanel templateEdit;
     private JTextField templateNameText;
-    private JTextField classNumberText;
-    private JTextField classNameText;
-    private JButton    deleteTemplateButton;
-    private JPanel     editorPane;
-    private JTextField fileEncodingText;
+    private JButton deleteTemplateButton;
+    private JPanel editorPane;
     private Editor editor;
 
     public TemplateEditPane(CodeTemplateSettings settings, String template,
@@ -35,8 +33,6 @@ public class TemplateEditPane {
         }
 
         templateNameText.setText(codeTemplate.getName());
-
-        System.out.println(codeTemplate.getTemplate());
 
         addVmEditor(codeTemplate.getTemplate());
         deleteTemplateButton.addActionListener(e -> {
@@ -52,24 +48,15 @@ public class TemplateEditPane {
         EditorFactory factory = EditorFactory.getInstance();
         Document velocityTemplate = factory.createDocument(template);
         editor = factory.createEditor(velocityTemplate, null, FileTypeManager.getInstance()
-            .getFileTypeByExtension("vm"), false);
+                .getFileTypeByExtension("vm"), false);
         GridConstraints constraints = new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST,
-            GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW,
-            GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(300, 300), null, 0, true);
+                GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW,
+                GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(300, 300), null, 0, true);
         editorPane.add(editor.getComponent(), constraints);
     }
 
-    /**
-     * Getter method for property <tt>templateEdit</tt>.
-     *
-     * @return property value of templateEdit
-     */
     public JPanel getTemplateEdit() {
         return templateEdit;
-    }
-
-    public String getClassName() {
-        return classNameText.getText();
     }
 
     public String getTemplateName() {
@@ -80,19 +67,5 @@ public class TemplateEditPane {
         return editor.getDocument().getText();
     }
 
-    public String getFileEncoding() {
-        return fileEncodingText.getText();
-    }
-
-    /**
-     *
-     * @return -1 if classNumberText is not number
-     */
-    public int getClassNumber() {
-//        if (CodeMakerUtil.isNumeric(classNumberText.getText())) {
-//            return Integer.parseInt(classNumberText.getText());
-//        }
-        return -1;
-    }
 
 }

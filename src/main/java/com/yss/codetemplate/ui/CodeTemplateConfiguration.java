@@ -11,12 +11,13 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * @author hansong.xhs
- * @version $Id: CodeMakerConfiguration.java, v 0.1 2017-02-01 11:32 hansong.xhs Exp $$
+ * @author lixingjun
+ * @date 2019/3/7
+ * @description: TODO
  */
 public class CodeTemplateConfiguration {
-    private JPanel                        mainPane;
-    private JButton                       addTemplateButton;
+    private JPanel mainPane;
+    private JButton addTemplateButton;
     private JBTabbedPane tabbedPane;
     private TreeMap<String, TemplateEditPane> editPaneMap;
 
@@ -48,10 +49,6 @@ public class CodeTemplateConfiguration {
     }
 
     private void resetTabPane(CodeTemplateSettings settings) {
-        settings.getCodeTemplates().forEach((key, value)->{
-            System.out.println("key=" + key);
-            System.out.println("value="+value.getName());
-        });
         settings.getCodeTemplates().forEach((key, value) -> {
             TemplateEditPane editPane = new TemplateEditPane(settings, key, this);
             tabbedPane.addTab(key, editPane.getTemplateEdit());

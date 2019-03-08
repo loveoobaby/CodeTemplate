@@ -13,8 +13,9 @@ import javax.swing.*;
 import java.util.Map;
 
 /**
- * @author hansong.xhs
- * @version $Id: CodeMakerConfigurable.java, v 0.1 2017-01-31 9:09 hansong.xhs Exp $$
+ * @author lixingjun
+ * @date 2019/3/7
+ * @description:
  */
 public class CodeTemplateConfigurable implements SearchableConfigurable {
 
@@ -47,7 +48,7 @@ public class CodeTemplateConfigurable implements SearchableConfigurable {
     @Nullable
     @Override
     public String getHelpTopic() {
-        return "help.codemaker.configuration";
+        return "help.codetemplate.configuration";
     }
 
     @Nullable
@@ -83,7 +84,7 @@ public class CodeTemplateConfigurable implements SearchableConfigurable {
         for (Map.Entry<String, CodeTemplate> entry : configuration.getTabTemplates().entrySet()) {
             if (!entry.getValue().isValid()) {
                 throw new ConfigurationException(
-                    "Not property can be empty and classNumber should be a number");
+                        "Not property can be empty and classNumber should be a number");
             }
         }
         settings.setCodeTemplates(configuration.getTabTemplates());
