@@ -27,6 +27,14 @@
                description="BasicActionGroup" popup="true">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </group>
+        <group id="NettyActionGroup" class="com.yss.codetemplate.action.NettyTemplateGroup" text="NettyTemplate"
+               description="NettyActionGroup" popup="true">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </group>
+        <group id="JDKActionGroup" class="com.yss.codetemplate.action.JDKTemplateGroup" text="JdkTemplate"
+               description="JdkActionGroup" popup="true">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </group>
 
     </actions>
 

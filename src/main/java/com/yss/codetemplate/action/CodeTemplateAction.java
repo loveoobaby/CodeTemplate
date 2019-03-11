@@ -11,6 +11,7 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
+import com.yss.codetemplate.CodeTemplate;
 import com.yss.codetemplate.CodeTemplateSettings;
 
 /**
@@ -22,15 +23,12 @@ public class CodeTemplateAction extends AnAction implements DumbAware {
 
     private static final Logger log = Logger.getInstance(CodeTemplateAction.class);
 
-    private CodeTemplateSettings settings;
+    private CodeTemplate codeTemplate;
 
-    private String templateKey;
-
-    CodeTemplateAction(String templateKey) {
-        this.settings = ServiceManager.getService(CodeTemplateSettings.class);
-        this.templateKey = templateKey;
+    CodeTemplateAction(CodeTemplate codeTemplate) {
+        this.codeTemplate = codeTemplate;
         getTemplatePresentation().setDescription("description");
-        getTemplatePresentation().setText(templateKey, false);
+        getTemplatePresentation().setText(codeTemplate.getName(), false);
     }
 
 
@@ -38,6 +36,7 @@ public class CodeTemplateAction extends AnAction implements DumbAware {
     public void actionPerformed(AnActionEvent e) {
         final Project project = e.getProject();
         final Editor editor = DataKeys.EDITOR.getData(e.getDataContext());
+
         final int offset = editor.getCaretModel().getOffset();
         final Document document = editor.getDocument();
         int lineNum = document.getLineNumber(offset);
@@ -46,7 +45,7 @@ public class CodeTemplateAction extends AnAction implements DumbAware {
         new WriteCommandAction(project) {
             @Override
             protected void run(Result result) throws Throwable {
-                document.insertString(startOffset, settings.getCodeTemplate(templateKey).getTemplate() + "\n");
+                document.insertString(startOffset, codeTemplate.getTemplate() + "\n");
             }
         }.execute();
     }
