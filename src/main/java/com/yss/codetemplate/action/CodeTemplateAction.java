@@ -5,14 +5,12 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.application.Result;
 import com.intellij.openapi.command.WriteCommandAction;
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import com.yss.codetemplate.CodeTemplate;
-import com.yss.codetemplate.CodeTemplateSettings;
 
 /**
  * @author lixingjun
@@ -21,7 +19,6 @@ import com.yss.codetemplate.CodeTemplateSettings;
  */
 public class CodeTemplateAction extends AnAction implements DumbAware {
 
-    private static final Logger log = Logger.getInstance(CodeTemplateAction.class);
 
     private CodeTemplate codeTemplate;
 
@@ -37,10 +34,15 @@ public class CodeTemplateAction extends AnAction implements DumbAware {
         final Project project = e.getProject();
         final Editor editor = DataKeys.EDITOR.getData(e.getDataContext());
 
+        if(editor == null){
+            Messages.showInfoMessage("请打开编辑器, 光标放在插入位置", "Error");
+            return;
+        }
+
         final int offset = editor.getCaretModel().getOffset();
         final Document document = editor.getDocument();
         int lineNum = document.getLineNumber(offset);
-        int startOffset = document.getLineStartOffset(lineNum + 1);
+        int startOffset = document.getLineStartOffset(lineNum);
 
         new WriteCommandAction(project) {
             @Override

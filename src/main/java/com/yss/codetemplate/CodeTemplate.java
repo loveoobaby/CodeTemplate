@@ -3,7 +3,6 @@ package com.yss.codetemplate;
 import com.intellij.openapi.util.text.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 /**
