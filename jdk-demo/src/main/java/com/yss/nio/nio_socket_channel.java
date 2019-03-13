@@ -43,6 +43,7 @@ public class nio_socket_channel {
 
             buf.flip();
 
+            // 非阻塞模式下，write()方法在尚未写出任何内容时可能就返回了。所以需要在循环中调用write()
             while(buf.hasRemaining()) {
                 socketChannel.write(buf);
             }
