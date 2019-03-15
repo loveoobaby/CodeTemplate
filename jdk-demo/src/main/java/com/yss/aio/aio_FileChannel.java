@@ -6,7 +6,6 @@ import java.nio.CharBuffer;
 import java.nio.channels.AsynchronousFileChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.charset.CharacterCodingException;
-import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -23,7 +22,7 @@ import java.util.concurrent.Future;
  *
  * 相比于IO多路复用模型，异步IO并不十分常用，不少高性能并发服务程序使用IO多路复用模型+多线程任务处理的架构基本可以满足需求
  */
-public class aio_file_channel {
+public class aio_FileChannel {
 
     public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
 

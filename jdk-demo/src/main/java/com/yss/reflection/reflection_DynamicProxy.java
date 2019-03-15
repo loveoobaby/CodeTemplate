@@ -11,7 +11,7 @@ import java.lang.reflect.Proxy;
  *   2、一个要实现的接口的数组。
  *   3、一个InvocationHandler把所有方法的调用都转到代理上。
  */
-public class reflection_dynamic_proxy {
+public class reflection_DynamicProxy {
 
     public static interface MyInterface {
 

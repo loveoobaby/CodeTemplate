@@ -8,7 +8,7 @@ import java.io.RandomAccessFile;
  * RandomAccessFile允许你来回读写文件，也可以替换文件中的某些部分
  * FileInputStream和FileOutputStream没有这样的功能
  */
-public class io_random_access_file {
+public class io_RandomAccessFile {
 
     public static void main(String[] args) {
         String filePath = "";

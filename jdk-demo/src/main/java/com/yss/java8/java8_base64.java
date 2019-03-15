@@ -6,7 +6,7 @@ import java.util.Base64;
 /**
  * Base64是一种用64个字符来表示任意二进制数据的方法
  */
-public class java8_base64 {
+public class java8_Base64 {
 
     public static void main(String[] args) {
         Base64.Encoder encoder = Base64.getEncoder();

@@ -12,7 +12,7 @@ import java.util.Set;
  * 事实上，可以只用一个线程处理所有的通道。
  * 对于操作系统来说，线程之间上下文切换的开销很大，而且每个线程都要占用系统的一些资源（如内存）, 因此使用的线程越少越好
  */
-public class nio_selector {
+public class nio_Selector {
 
     public void beginSelect(SocketChannel channel) throws IOException {
         // 创建Selector

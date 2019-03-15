@@ -10,7 +10,7 @@ import java.nio.channels.FileChannel;
  * 同样，内核空间对这段区域进行修改也会直接反应用户空间。对于内核空间与用户空间之间需要大量数据传输的话效率很高。
  * 内存映射对应于Linux的mmap系统调用
  */
-public class nio_memory_mapped_file {
+public class nio_MappedByteBuffer {
 
     static int length = 0x8FFFFFF;
 

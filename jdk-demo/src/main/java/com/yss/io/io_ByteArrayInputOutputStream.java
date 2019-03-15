@@ -1,9 +1,12 @@
 package com.yss.io;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 
-public class io_byte_array_input_output_stream {
+public class io_ByteArrayInputOutputStream {
 
     public static void main(String[] args) throws IOException {
         {

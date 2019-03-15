@@ -7,7 +7,7 @@ import java.util.Optional;
  * @date 2019/3/14下午4:38
  * @description: TODO
  */
-public class java8_optional {
+public class java8_Optional {
 
     public static void main(String[] args) {
 
@@ -47,6 +47,7 @@ public class java8_optional {
          *      System.out.println(user.get());
          *    }
          *    =================================
+         *
          *    if(user.isPresent()) {
          *        return user.get().getOrders();
          *    } else {

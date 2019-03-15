@@ -5,7 +5,7 @@ package com.yss.java8;
  * 如果想声明别的函数必须有默认实现
  */
 @FunctionalInterface
-public interface java8_functional {
+public interface java8_FunctionalInterface {
 
     public void firstWork();
 

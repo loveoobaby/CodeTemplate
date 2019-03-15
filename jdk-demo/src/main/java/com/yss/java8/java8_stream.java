@@ -1,9 +1,7 @@
 package com.yss.java8;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -11,7 +9,7 @@ import java.util.stream.Stream;
  * Stream 是 Java8 中处理集合的关键抽象概念，
  * 它可以指定你希望对集合进行的操作，可以执行非常复杂的查找、过滤和映射数据等操作
  */
-public class java8_stream {
+public class java8_Stream {
     public static void main(String[] args) {
 
         //创建Stream

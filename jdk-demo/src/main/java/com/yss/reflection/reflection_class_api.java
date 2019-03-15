@@ -9,7 +9,7 @@ import java.lang.reflect.Modifier;
 /**
  *
  */
-public class reflection_class_api {
+public class reflection_Class_Api {
 
     public static void main(String[] args) throws ClassNotFoundException {
 

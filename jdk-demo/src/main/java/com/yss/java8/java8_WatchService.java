@@ -1,23 +1,15 @@
 package com.yss.java8;
 
 
-import static java.nio.file.StandardWatchEventKinds.*;
-
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.WatchEvent;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.Map;
 
-public class java8_watch_service {
+import static java.nio.file.StandardWatchEventKinds.*;
+
+public class java8_WatchService {
 
     private final WatchService watcher;
     private final Map<WatchKey, Path> keys;
@@ -25,7 +17,7 @@ public class java8_watch_service {
     /**
      * Creates a WatchService and registers the given directory
      */
-    java8_watch_service(Path dir) throws IOException {
+    java8_WatchService(Path dir) throws IOException {
         this.watcher = FileSystems.getDefault().newWatchService();
         this.keys = new HashMap<WatchKey, Path>();
 
@@ -113,6 +105,6 @@ public class java8_watch_service {
 
     public static void main(String[] args) throws IOException {
         Path dir = Paths.get("/Users/yss/Manual");
-        new java8_watch_service(dir).processEvents();
+        new java8_WatchService(dir).processEvents();
     }
 }

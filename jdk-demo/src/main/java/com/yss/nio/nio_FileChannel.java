@@ -17,7 +17,7 @@ import java.nio.channels.FileChannel;
  *    3. SocketChannel： 能通过TCP读写网络中的数据
  *    4. ServerSocketChannel： 可以监听新进来的TCP连接，像Web服务器那样。对每一个新进来的连接都会创建一个SocketChannel。
  */
-public class nio_file_channel {
+public class nio_FileChannel {
     public static void main(String[] args) throws IOException {
 
 

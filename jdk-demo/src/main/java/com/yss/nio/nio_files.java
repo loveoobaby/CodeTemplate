@@ -8,7 +8,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 /**
  *  java.nio.file.Files类提供了操作文件的API
  */
-public class nio_files {
+public class nio_Files {
 
     public static void main(String[] args) throws IOException {
         {

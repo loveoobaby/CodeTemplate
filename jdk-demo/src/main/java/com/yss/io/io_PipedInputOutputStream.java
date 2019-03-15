@@ -1,7 +1,5 @@
 package com.yss.io;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
@@ -13,7 +11,7 @@ import java.io.PipedOutputStream;
  * 在Unix/Linux中，运行在不同地址空间的两个进程可以通过管道通信。
  * 在Java中，通信的双方应该是运行在同一进程中的不同线程。
  */
-public class io_piped_input_output_stream {
+public class io_PipedInputOutputStream {
 
     public static void main(String[] args) throws IOException {
         final PipedOutputStream output = new PipedOutputStream();

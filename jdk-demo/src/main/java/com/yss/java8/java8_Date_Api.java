@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 
-public class java8_date_time {
+public class java8_Date_Api {
 
     public static void main(String[] args) {
         //  LocalDate用于处理日期, 不能处理精确的时间或时区，是一个不可变的类，默认格式(yyyy-MM-dd)

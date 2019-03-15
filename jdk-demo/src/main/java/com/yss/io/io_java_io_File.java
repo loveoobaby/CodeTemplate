@@ -3,11 +3,11 @@ package com.yss.io;
 import java.io.File;
 
 /**
- * FIle类可以实现访问底层文件系统
+ * Files类可以实现访问底层文件系统
  * File只能访问文件以及文件系统的元数据。
  * 如果你想读写文件内容，需要使用FileInputStream、FileOutputStream或者RandomAccessFile
  */
-public class io_java_io_file_demo {
+public class io_java_io_File {
 
     public static void main(String[] args) {
 

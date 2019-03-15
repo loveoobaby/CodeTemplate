@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 /**
  * 可以运行期检查一个类的变量信息(成员变量)或者获取或者设置变量的值
  */
-public class reflection_field {
+public class reflection_Field {
 
     private static class MyObject {
         private String first;

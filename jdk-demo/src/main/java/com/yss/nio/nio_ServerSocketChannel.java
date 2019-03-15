@@ -8,7 +8,7 @@ import java.nio.channels.SocketChannel;
 /**
  * ServerSocketChannel 是一个可以监听新进来的TCP连接的通道
  */
-public class nio_server_socket_channel {
+public class nio_ServerSocketChannel {
 
     public static void main(String[] args) throws IOException {
         // 打开ServerSocketChannel

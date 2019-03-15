@@ -1,9 +1,12 @@
 package com.yss.io;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 
-public class io_buffered_Input_output_stream {
+public class io_BufferedInputOutputStream {
     public static void main(String[] args) throws IOException {
 
         {
