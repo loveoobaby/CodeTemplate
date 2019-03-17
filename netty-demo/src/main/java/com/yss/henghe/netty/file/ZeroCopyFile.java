@@ -23,7 +23,7 @@ import java.io.RandomAccessFile;
 /**
  * Server that accept the path of a file an echo back its content.
  */
-public final class zero_copy_file {
+public final class ZeroCopyFile {
 
     static final boolean SSL = System.getProperty("ssl") != null;
     // Use the same default port with the telnet example so that we can use the telnet client example to access it.

@@ -54,6 +54,13 @@ public class java8_Optional {
          *       return Collections.emptyList();
          *    }
          *
+         *    =================================
+         *    if (null == status) {
+         *      param.put("status", new ArrayList<String>());
+         *   } else {
+         *     param.put("status", status);
+         *   }
+         *
          * 建议：
          *    return user.orElse(null);
          *    return user.orElseGet(() -> fetchAUserFromDatabase()); //而不要 return user.isPresent() ? user: fetchAUserFromDatabase();
@@ -63,6 +70,9 @@ public class java8_Optional {
          *    =================================
          *
          *    return user.map(u -> u.getOrders()).orElse(Collections.emptyList())
+         *    =================================
+         *
+         *    Optional.ofNullable(status).orElse(new ArrayList<String>())
          */
 
 

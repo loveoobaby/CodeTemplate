@@ -9,7 +9,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import java.net.InetSocketAddress;
 
 
-public class channel_future_demo {
+public class ChannelFuture_demo {
 
     public static void main(String[] args) {
 

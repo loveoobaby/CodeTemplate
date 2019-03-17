@@ -5,7 +5,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.util.CharsetUtil;
 
 
-public class byter_buf_demo {
+public class ByterBuf_demo {
 
     public static void main(String[] args) {
         /**
