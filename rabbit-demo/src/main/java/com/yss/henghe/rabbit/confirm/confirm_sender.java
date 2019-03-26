@@ -1,5 +1,6 @@
 package com.yss.henghe.rabbit.confirm;
 
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -7,11 +8,10 @@ import com.rabbitmq.client.ConnectionFactory;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class SenderUseConfirm {
-
-    private final static String QUEUE_NAME = "lixingjun";
+public class confirm_sender {
 
     public static void main(String[] args) throws IOException, TimeoutException {
+        String queueName = "test";
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUsername("admin");
         factory.setPassword("admin");
@@ -20,19 +20,15 @@ public class SenderUseConfirm {
         Connection conn = factory.newConnection();
         Channel channel = conn.createChannel();
 
-        channel.queueDeclare(QUEUE_NAME, true, false, false, null);
-
+        channel.queueDeclare(queueName, true, false, false, null);
         channel.confirmSelect();
-//        channel.queueDeclare()
 
         for (int i = 0; i < 100000; i++) {
             String message = "" + System.currentTimeMillis();
-            channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+            channel.basicPublish("", queueName, null, message.getBytes());
             try {
-//                boolean confirm = channel.waitForConfirms();
                 boolean confirm = channel.waitForConfirms(100);
-
-//                System.out.println("confirm result : " + confirm);
+                System.out.println("confirm result : " + confirm);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -40,7 +36,6 @@ public class SenderUseConfirm {
 
         channel.close();
         conn.close();
-
     }
 
 }

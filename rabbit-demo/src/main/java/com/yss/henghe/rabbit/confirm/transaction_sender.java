@@ -8,13 +8,12 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 
+public class transaction_sender {
 
-
-public class SenderUseTransaction {
-
-    private final static String QUEUE_NAME = "lixingjun";
 
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
+        String queueName = "test";
+
         ConnectionFactory factory = new ConnectionFactory();
         factory.setUsername("admin");
         factory.setPassword("admin");
@@ -23,20 +22,22 @@ public class SenderUseTransaction {
         Connection conn = factory.newConnection();
         Channel channel = conn.createChannel();
 
-        channel.queueDeclare(QUEUE_NAME, true, false, false, null);
+        channel.queueDeclare(queueName, true, false, false, null);
 
         channel.txSelect();
         for (int i = 0; i < 100000; i++) {
             try{
                 System.out.println(i);
                 String message = "" + System.currentTimeMillis();
-                channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+                channel.basicPublish("", queueName, null, message.getBytes());
+                if(i%2==0){
+                    throw new RuntimeException("");
+                }
                 channel.txCommit();
             }catch (Exception e){
                 channel.txRollback();
             }
         }
-
 
         channel.close();
         conn.close();
