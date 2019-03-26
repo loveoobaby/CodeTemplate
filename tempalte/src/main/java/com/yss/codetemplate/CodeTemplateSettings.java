@@ -33,15 +33,6 @@ public class CodeTemplateSettings implements PersistentStateComponent<CodeTempla
         try {
             {
                 Map<String, CodeTemplate> codeTemplates = new TreeMap<>();
-
-                String velocityTemplate = FileUtil.loadTextAndClose(CodeTemplateSettings.class.getResourceAsStream("/template/default.json"));
-                JSONArray array = JSON.parseArray(velocityTemplate);
-                for (int i = 0; i < array.size(); i++) {
-                    JSONObject codeTempJson = array.getJSONObject(i);
-                    String name = codeTempJson.getString("name");
-                    codeTemplates.put(name, new CodeTemplate(name, codeTempJson.getString("template")));
-                }
-
                 this.codeTemplates = codeTemplates;
             }
 
@@ -75,6 +66,20 @@ public class CodeTemplateSettings implements PersistentStateComponent<CodeTempla
 
             }
 
+            {
+                Map<String, CodeTemplate> jdkTemplates = new TreeMap<>();
+
+                String velocityTemplate = FileUtil.loadTextAndClose(CodeTemplateSettings.class.getResourceAsStream("/template/rabbit.json"));
+                JSONArray array = JSON.parseArray(velocityTemplate);
+                for (int i = 0; i < array.size(); i++) {
+                    JSONObject codeTempJson = array.getJSONObject(i);
+                    String name = codeTempJson.getString("name");
+                    jdkTemplates.put(name, new CodeTemplate(name, codeTempJson.getString("template")));
+                }
+
+                this.rabbitTemplates = jdkTemplates;
+            }
+
         } catch (Exception e) {
             LOGGER.error("loadDefaultSettings failed", e);
         }
@@ -96,10 +101,18 @@ public class CodeTemplateSettings implements PersistentStateComponent<CodeTempla
         return nettyTemplates;
     }
 
+    public Map<String, CodeTemplate> getRabbitTemplates(){
+        if(rabbitTemplates == null){
+            loadDefaultSettings();
+        }
+        return rabbitTemplates;
+    }
+
 
     private Map<String, CodeTemplate> codeTemplates;
     private Map<String, CodeTemplate> nettyTemplates;
     private Map<String, CodeTemplate> jdkTemplates;
+    private Map<String, CodeTemplate> rabbitTemplates;
 
     public void setCodeTemplates(Map<String, CodeTemplate> codeTemplates) {
         this.codeTemplates = codeTemplates;

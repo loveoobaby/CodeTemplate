@@ -43,19 +43,20 @@ public class topic_mode {
 
     private static class Sender extends BasicConnection {
         private String exchangeName;
+        private String routingKey;
 
-        public Sender(String userName, String passwd, String host, String exchangeName) throws IOException, TimeoutException {
+        public Sender(String userName, String passwd, String host, String exchangeName, String routingKey) throws IOException, TimeoutException {
             super(userName, passwd, host);
             this.exchangeName = exchangeName;
             super.init();
-            channel.exchangeDeclare(exchangeName, "fanout");
+            channel.exchangeDeclare(exchangeName, "topic");
+            this.routingKey = routingKey;
         }
-
 
         public Sender send() throws IOException {
             for(int i=0;i<1;i++){
                 String message = "" + i;
-                channel.basicPublish(this.exchangeName, "", null, message.getBytes("UTF-8"));
+                channel.basicPublish(this.exchangeName, routingKey, null, message.getBytes("UTF-8"));
             }
             return this;
         }
@@ -68,12 +69,12 @@ public class topic_mode {
         private  String queueName;
 
 
-        public Consumer(String userName, String passwd, String host, String queueName, String exChangeName) throws IOException, TimeoutException {
+        public Consumer(String userName, String passwd, String host, String queueName, String exChangeName, String routingKey) throws IOException, TimeoutException {
             super(userName, passwd, host);
             super.init();
             this.queueName = queueName;
             channel.queueDeclare(queueName, true, false, false, null);
-            channel.queueBind(queueName, exChangeName, "");
+            channel.queueBind(queueName, exChangeName, routingKey);
         }
 
 
@@ -99,13 +100,16 @@ public class topic_mode {
 
     public static void main(String[] args) throws IOException, TimeoutException, InterruptedException {
 
+        /**
+         * 如果MQ没有相应的交换机请先建立
+         */
         System.out.println("begin consume");
-        new Consumer("admin", "admin", "henghe-125", "test1", "test_exhange").consum();
-        new Consumer("admin", "admin", "henghe-125", "test2", "test_exhange").consum();
-        new Consumer("admin", "admin", "henghe-125", "test3", "test_exhange").consum();
-        new Consumer("admin", "admin", "henghe-125", "test4", "test_exhange").consum();
+        new Consumer("admin", "admin", "henghe-125", "test1", "topic_exhange", "log.error").consum();
+        new Consumer("admin", "admin", "henghe-125", "test2", "topic_exhange", "log.info").consum();
+        new Consumer("admin", "admin", "henghe-125", "test3", "topic_exhange", "log.debug").consum();
+        new Consumer("admin", "admin", "henghe-125", "test4", "topic_exhange", "log.error").consum();
 
-        Sender sender = new Sender("admin", "admin", "henghe-125", "test_exhange");
+        Sender sender = new Sender("admin", "admin", "henghe-125", "topic_exhange", "log.error");
         sender.send().close();
     }
 }

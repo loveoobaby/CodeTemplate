@@ -36,6 +36,11 @@
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </group>
 
+        <group id="rabbitActionGroup" class="com.yss.codetemplate.action.RabbitTemplateGroup" text="RabbitTemplate"
+               description="rabbitActionGroup" popup="true">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </group>
+
     </actions>
 
 
